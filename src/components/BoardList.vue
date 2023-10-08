@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'BoardList',
   // data() {
@@ -35,20 +36,10 @@ export default {
   // },
   methods: {
     goWrite() {
-      console.log(123);
-      //this.$router.push('/boardWrite');
-      this.$nextTick(() => {
-        this.$router.push('/boardWrite');
-      });
+      console.log('글쓰기 버튼 클릭');
 
       //글쓰기버튼 클릭시 라우팅 시킬 수 있는 함수 생성
-      //this.$router.push({}) -페이지이동
-      // if (this.$router.path !== '/boardWrite'){
-        // this.$router.push({
-        // path: 'boardWrite'
-        // })
-      // }
-      // this.$router.replace('/BoardWrite');
+      this.$router.push('/boardWrite');
     }
   }
 }
@@ -103,12 +94,12 @@ export default {
  /* margin-bottom: 30px; */
  /* position: absolute 100; */
  /* float: right; */
-  position: absolute; /* 절대 위치로 설정 */
+  position: absolute; /* 절대 위치설정 */
   top: 0; /* 부모 요소의 상단에 고정 */
   right: 0; /* 부모 요소의 오른쪽에 고정 */
 }
 .write-button:hover {
-  background-color: #FFD700; /* Yellow background on hover */
-  color: #fff; /* White text color on hover */
+  background-color: #FFD700; 
+  color: #fff;
 }
 </style>
