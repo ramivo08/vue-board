@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <BoardHeader></BoardHeader>
+    <BoardList></BoardList>
+    <!-- <BoardWrite></BoardWrite> -->
+    <BoardFooter></BoardFooter>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import BoardHeader from './components/BoardHeader.vue'
+import BoardList from './components/BoardList.vue'
+// import BoardWrite from './components/BoardWrite.vue'
+import BoardFooter from './components/BoardFooter.vue'
+
+
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    //컴포넌트 태그명 : 컴포넌트 내용
+    'BoardHeader': BoardHeader,
+    'BoardList' : BoardList,
+    // 'BoardWrite' : BoardWrite,
+    'BoardFooter' : BoardFooter
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
