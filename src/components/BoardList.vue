@@ -99,17 +99,15 @@ export default {
 
 /* CSS styles for the "글쓰기" button */
 .write-button {
-  background-color: #fff; /* White background */
-  color: #FFD700; /* Yellow border color */
-  border: 1px solid #FFD700; /* 1px yellow border */
+  background-color: #fff;
+  color: #FFD700;
+  border: 1px solid #FFD700;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 13px;
   /* margin-left: 1280px; */
  /* margin-bottom: 30px; */
- /* position: absolute 100; */
- /* float: right; */
   position: absolute; /* 절대 위치설정 */
   top: 0; /* 부모 요소의 상단에 고정 */
   right: 0; /* 부모 요소의 오른쪽에 고정 */
