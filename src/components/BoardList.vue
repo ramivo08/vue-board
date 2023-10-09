@@ -1,7 +1,6 @@
 <template>
   <div class="table-wrapper">
     <button class="write-button" @click="goWrite">글쓰기</button>
-    <!-- <router-link to="/boardWrite" class="write-button">글쓰기</router-link> -->
     <table class="styled-table">
       <thead>
         <tr>
@@ -13,13 +12,17 @@
         </tr>
       </thead>
       <tbody name="boardList">
-        <tr>
-          <td>1</td>
-          <td>타이틀</td>
-          <td>익명</td>
-          <td>2023.10.01</td>
-          <td>삭제</td>
-        </tr>
+        <!-- <tr> -->
+        <transition-group name="list" tag="tr" v-for="(item, index) in boardItem" v-bind:key="item.id">
+          <td v-bind:key="item.id + 'index'">{{ index + 1 }}</td>
+          <td v-bind:key="item.id + 'title'">{{ item.title }}</td>
+          <td v-bind:key="item.id + 'writer'">{{ item.writer }}</td>
+          <td v-bind:key="item.id + 'timestamp'">{{ item.timestamp }}</td>
+          <td v-bind:key="item.id + 'delete'" @click="removeList">
+            <i class="removeBtn fa-solid fa-trash"></i>
+          </td>
+        </transition-group>
+        <!-- </tr> -->
       </tbody>
     </table>
   </div>
@@ -29,17 +32,30 @@
 
 export default {
   name: 'BoardList',
-  // data() {
-  //   return{
-  //     data: data
-  //   }
-  // },
+  data() {
+    return{
+      boardItem: []
+    }
+  },
+  created: function() {
+    console.log('a', localStorage.length); //1 , 글 5개 등록했는데 길이는 1개
+    console.log('aa', localStorage.getItem('boardPost')); //객체를 가져옴.
+
+    if(localStorage.getItem('boardPost')){
+      this.boardItem = JSON.parse(localStorage.getItem('boardPost')).map(function (item, index) {
+        return { index: index, id: index, title: item.title, writer: item.writer, timestamp: item.timestamp };
+      });
+    }
+  },
   methods: {
-    goWrite() {
+    goWrite: function() {
       console.log('글쓰기 버튼 클릭');
 
       //글쓰기버튼 클릭시 라우팅 시킬 수 있는 함수 생성
       this.$router.push('/boardWrite');
+    },
+    removeList: function() {
+      console.log('삭제버튼 클릭');
     }
   }
 }
@@ -101,5 +117,9 @@ export default {
 .write-button:hover {
   background-color: #FFD700; 
   color: #fff;
+}
+.removeBtn {
+  margin-left: auto;
+  color: #05050542
 }
 </style>

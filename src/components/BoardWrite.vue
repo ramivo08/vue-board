@@ -3,7 +3,7 @@
     <h1 style="margin-bottom: 45px;">게시판 작성하기</h1>
     <div class="input-group">
       <label>제목</label>
-      <input type="text" v-model="boardTitle" placeholder="제목을 입력하세요">
+      <input type="text" v-model="title" placeholder="제목을 입력하세요">
     </div>
     <div class="input-group">
       <label>내용</label>
@@ -15,7 +15,7 @@
     </div>
     <div class="button-group">
       <button @click="submitPost">등록</button>
-      <button>목록</button>
+      <button @click="goList">목록</button>
     </div>
   </div>
 </template>
@@ -25,20 +25,21 @@ export default {
 
   data: function() {
     return {
-      boardTitle : '',
+      title : '',
       content : '',
       writer : '',
+      timestamp: '',
       boardPost: [],
     }
   },
-  create: function() {
+  created: function() {
     //create LifeCycle Hook으로 localStorage에서 boardPost에 저장된 데이터를 불러오고, 배열에  할당함
     if(localStorage.getItem('boardPost')){
       this.boardPost = JSON.parse(localStorage.getItem('boardPost'))
     }
   },
   methods: {
-    submitPost() {
+    submitPost: function() {
       // 게시판 글 등록
       console.log("등록 클릭");
 
@@ -46,7 +47,7 @@ export default {
       var toDay = new Date();
       var year = toDay.getFullYear();
       var month = ('0' + (toDay.getMonth() + 1)).slice(-2); //getMonth()함수는 0~11 반환하므로 +1해준다. 마지막 두개요소 추출
-      console.log(('0' + (toDay.getMonth() + 1)));
+     //console.log(('0' + (toDay.getMonth() + 1)));
       var day = ('0' + toDay.getDate()).slice(-2);
 
       
@@ -55,19 +56,26 @@ export default {
 
       //새 게시글 정보 객체로 만들기
       const newPost = {
-        title: this.boardTitle,
+        title: this.title,
         content: this.content,
         writer: this.writer,
-        timestamp: this.currentDay
+        timestamp: currentDay
       }
+      console.log('newPost', newPost);
 
       //localStorage에 게시글 저장하기
       this.boardPost.push(newPost);
       localStorage.setItem('boardPost', JSON.stringify(this.boardPost));
 
-      this.boardTitle = '';
+      this.title = '';
       this.content = '';
       this.writer = '';
+
+      this.$router.push('/');
+    },
+    goList: function() {
+      console.log('목록버튼 클릭');
+      this.$router.push('/');
     }
   }
 }
