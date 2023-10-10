@@ -1,8 +1,8 @@
 <template>
   <div>
+    <!-- <BoardHeader></BoardHeader> -->
     <router-view></router-view>
-    <!-- <BoardHeader></BoardHeader>
-    <BoardList></BoardList> -->
+    <!-- <BoardList></BoardList> -->
     <!-- <BoardWrite></BoardWrite> -->
     <!-- <BoardFooter></BoardFooter> -->
   </div>
@@ -18,13 +18,13 @@
 
 
 export default {
-  name: 'App'
+  name: 'App',
   // components: {
   //   //컴포넌트 태그명 : 컴포넌트 내용
-  //   'BoardHeader': BoardHeader,
-  //   'BoardList' : BoardList,
+  //   //'BoardHeader': BoardHeader,
+  //   //'BoardList' : BoardList,
   //   // 'BoardWrite' : BoardWrite,
-  //   'BoardFooter' : BoardFooter
+  //   //'BoardFooter' : BoardFooter
   // }
 }
 </script>

@@ -110,9 +110,10 @@ export default {
 .write-button {
   background-color: #fff;
   color: #FFD700;
-  border: 1px solid #FFD700;
+  border: 2px solid #FFD700;
   padding: 10px 20px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   border-radius: 13px;
   /* margin-left: 1280px; */
@@ -132,5 +133,5 @@ export default {
 
 .removeBtn {
   margin-left: auto;
-  color: #05050542
+  color: #4C4C4C
 }</style>

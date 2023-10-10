@@ -17,10 +17,17 @@
       <button @click="submitPost">등록</button>
       <button @click="goList">목록</button>
     </div>
+    <AlertModal v-if="showModal" @close="showModal = false">
+      <h2 slot="header"><i class="fa-solid fa-triangle-exclamation fa-xl"></i> warning</h2>
+      <h3 slot="body">제목, 내용, 작성자 모두 입력해야 합니다.</h3> 
+    </AlertModal>
   </div>
 </template>
 
 <script>
+
+import AlertModal from './common/AlertModal.vue'
+
 export default {
 
   data: function() {
@@ -31,6 +38,7 @@ export default {
       writer : '',
       timestamp: '', //글이 작성된 날짜 저장하는 데이터
       boardPost: [], //작성된 게시판 글들을 저장하는 배열
+      showModal: false
     }
   },
   created: function() {
@@ -44,16 +52,21 @@ export default {
       // 게시판 글 등록
       console.log("등록 클릭");
 
+      //입력하는 내용중에 하나라도 없으면 모달창 열림
+      if (!this.title || !this.content || !this.writer) {
+        this.showModal = true;
+        return;
+      }
+
+
       //글 등록시 현재날짜와 시간 같이 등록되게 하기
       var toDay = new Date();
       var year = toDay.getFullYear();
       var month = ('0' + (toDay.getMonth() + 1)).slice(-2); //getMonth()함수는 0~11 반환하므로 +1해준다. 마지막 두개요소 추출
      //console.log(('0' + (toDay.getMonth() + 1)));
       var day = ('0' + toDay.getDate()).slice(-2);
-
       
       var currentDay = year + '-' + month + '-' + day;
-      console.log('currentDay', currentDay);
 
       //새 게시글 정보 객체로 만들기
       const newPost = {
@@ -64,7 +77,8 @@ export default {
       }
       console.log('newPost', newPost);
 
-      //localStorage에 게시글 저장하기
+      
+        //localStorage에 게시글 저장하기
       this.boardPost.push(newPost);
       localStorage.setItem('boardPost', JSON.stringify(this.boardPost));
 
@@ -73,11 +87,17 @@ export default {
       this.writer = '';
 
       this.$router.push('/');
+     
+
+  
     },
     goList: function() {
       console.log('목록버튼 클릭');
       this.$router.push('/');
     }
+  },
+  components: {
+    AlertModal: AlertModal
   }
 }
 </script>
@@ -138,4 +158,5 @@ button:hover {
   background-color: #FFD700; 
   color: #fff;
 }
+
 </style>
