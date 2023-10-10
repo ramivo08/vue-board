@@ -14,11 +14,14 @@
       <tbody name="boardList">
         <!-- <tr> -->
         <transition-group name="list" tag="tr" v-for="(item, index) in boardItem" v-bind:key="item.id">
-          <td v-bind:key="item.id + 'index'">{{ index + 1 }}</td>
+          <!-- 데이터가 객체이면, 객체 안의 특정 속성을 key값으로 지정해주어야 한다. -->
+          <!-- transition-group 컴포넌트 내부의 자식 요소들은 고유한 key 속성을 가져야 한다. -->
+          <!-- item.id값에 문자열을 더해서 고유한키를 생성하여 키 속성을 부여함으로써 각 요소를 식별.트랜지션효과처리 -->
+          <td v-bind:key="item.id + 'index'">{{ index + 1 }}</td> 
           <td v-bind:key="item.id + 'title'">{{ item.title }}</td>
           <td v-bind:key="item.id + 'writer'">{{ item.writer }}</td>
           <td v-bind:key="item.id + 'timestamp'">{{ item.timestamp }}</td>
-          <td v-bind:key="item.id + 'delete'" @click="removeList">
+          <td v-bind:key="item.id + 'delete'" @click="removeItem(index)">
             <i class="removeBtn fa-solid fa-trash"></i>
           </td>
         </transition-group>
@@ -31,31 +34,35 @@
 <script>
 
 export default {
-  name: 'BoardList',
   data() {
-    return{
-      boardItem: []
+    return {
+      boardItem: [] //글 목록을 저장하는 배열
     }
   },
-  created: function() {
-    console.log('a', localStorage.length); //1 , 글 5개 등록했는데 길이는 1개
+  created: function () {
     console.log('aa', localStorage.getItem('boardPost')); //객체를 가져옴.
 
-    if(localStorage.getItem('boardPost')){
+    if (localStorage.getItem('boardPost')) {
+      //로컬스토리지에서 'boardPost' key에 저장된 데이터를 불러와서 "boardItem"이라는 배열에 저장
+
       this.boardItem = JSON.parse(localStorage.getItem('boardPost')).map(function (item, index) {
         return { index: index, id: index, title: item.title, writer: item.writer, timestamp: item.timestamp };
       });
     }
   },
   methods: {
-    goWrite: function() {
+    goWrite: function () {
       console.log('글쓰기 버튼 클릭');
 
       //글쓰기버튼 클릭시 라우팅 시킬 수 있는 함수 생성
       this.$router.push('/boardWrite');
     },
-    removeList: function() {
+    removeItem: function (index) {
       console.log('삭제버튼 클릭');
+     // console.log('item', item);
+      console.log('index', index);
+      this.boardItem.splice(index,1);
+      localStorage.removeItem('boardPost', JSON.stringify(this.boardItem));
     }
   }
 }
@@ -66,10 +73,12 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  width: 90%; /* 테이블의 너비를 조절합니다. */
+  width: 90%;
+  /* 테이블의 너비를 조절합니다. */
   margin: 25px auto;
   position: relative;
 }
+
 .styled-table {
   width: 90%;
   margin: 50px auto;
@@ -107,17 +116,21 @@ export default {
   cursor: pointer;
   border-radius: 13px;
   /* margin-left: 1280px; */
- /* margin-bottom: 30px; */
-  position: absolute; /* 절대 위치설정 */
-  top: 0; /* 부모 요소의 상단에 고정 */
-  right: 0; /* 부모 요소의 오른쪽에 고정 */
+  /* margin-bottom: 50px; */
+  position: absolute;
+  /* 절대 위치설정 */
+  top: 0;
+  /* 부모 요소의 상단에 고정 */
+  right: 0;
+  /* 부모 요소의 오른쪽에 고정 */
 }
+
 .write-button:hover {
-  background-color: #FFD700; 
+  background-color: #FFD700;
   color: #fff;
 }
+
 .removeBtn {
   margin-left: auto;
   color: #05050542
-}
-</style>
+}</style>

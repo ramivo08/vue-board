@@ -25,11 +25,12 @@ export default {
 
   data: function() {
     return {
+      //사용자가 입력한 제목,내용,작성자 저장하는 데이터 속성?
       title : '',
       content : '',
       writer : '',
-      timestamp: '',
-      boardPost: [],
+      timestamp: '', //글이 작성된 날짜 저장하는 데이터
+      boardPost: [], //작성된 게시판 글들을 저장하는 배열
     }
   },
   created: function() {
