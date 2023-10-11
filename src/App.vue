@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <BoardHeader></BoardHeader> -->
+    <BoardHeader></BoardHeader>
     <router-view></router-view>
     <!-- <BoardList></BoardList> -->
     <!-- <BoardWrite></BoardWrite> -->
@@ -10,7 +10,7 @@
 
 <script>
 
-//import BoardHeader from './components/BoardHeader.vue'
+import BoardHeader from './components/BoardHeader.vue'
 //import BoardList from './components/BoardList.vue'
 // import BoardWrite from './components/BoardWrite.vue'
 //import BoardFooter from './components/BoardFooter.vue'
@@ -19,13 +19,13 @@
 
 export default {
   name: 'App',
-  // components: {
-  //   //컴포넌트 태그명 : 컴포넌트 내용
-  //   //'BoardHeader': BoardHeader,
-  //   //'BoardList' : BoardList,
-  //   // 'BoardWrite' : BoardWrite,
-  //   //'BoardFooter' : BoardFooter
-  // }
+  components: {
+    //컴포넌트 태그명 : 컴포넌트 내용
+    'BoardHeader': BoardHeader,
+    //'BoardList' : BoardList,
+    // 'BoardWrite' : BoardWrite,
+    //'BoardFooter' : BoardFooter
+  }
 }
 </script>
 

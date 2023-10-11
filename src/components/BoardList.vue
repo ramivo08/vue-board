@@ -8,7 +8,7 @@
           <th>제목</th>
           <th>작성자</th>
           <th>등록일</th>
-          <th></th>
+          <th>  </th>
         </tr>
       </thead>
       <tbody name="boardList">

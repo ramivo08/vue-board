@@ -81,10 +81,12 @@ export default {
         //localStorage에 게시글 저장하기
       this.boardPost.push(newPost);
       localStorage.setItem('boardPost', JSON.stringify(this.boardPost));
+      console.log('boardPost', this.boardPost );
 
-      this.title = '';
-      this.content = '';
-      this.writer = '';
+      //입력된거 초기화작업
+      // this.title = '';
+      // this.content = '';
+      // this.writer = '';
 
       this.$router.push('/');
      
