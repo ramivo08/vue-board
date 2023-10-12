@@ -22,6 +22,7 @@
                     <!-- 헤더옆에 닫기 버튼 만드므로 주석처리 -->
                     <div class="modal-footer">
                     <slot name="footer">
+                        <!-- $emit- 뷰 내장 메서드, 이벤트 발생 -->
                       <button class="closeModalBtn" @click="$emit('close')">
                         확인
                       </button>

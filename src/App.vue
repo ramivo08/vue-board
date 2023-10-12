@@ -4,7 +4,7 @@
     <router-view></router-view>
     <!-- <BoardList></BoardList> -->
     <!-- <BoardWrite></BoardWrite> -->
-    <!-- <BoardFooter></BoardFooter> -->
+    <!-- <BoardDetail></BoardDetail> -->
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import BoardHeader from './components/BoardHeader.vue'
 //import BoardList from './components/BoardList.vue'
 // import BoardWrite from './components/BoardWrite.vue'
-//import BoardFooter from './components/BoardFooter.vue'
+// import BoardDetail from './components/BoardDetail.vue'
 
 
 
@@ -24,7 +24,7 @@ export default {
     'BoardHeader': BoardHeader,
     //'BoardList' : BoardList,
     // 'BoardWrite' : BoardWrite,
-    //'BoardFooter' : BoardFooter
+    // 'BoardDetail' : BoardDetail
   }
 }
 </script>

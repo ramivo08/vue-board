@@ -30,27 +30,26 @@ import AlertModal from './common/AlertModal.vue'
 
 export default {
 
-  data: function() {
+  data: function() { //사용할 데이터 정의
     return {
       //사용자가 입력한 제목,내용,작성자 저장하는 데이터 속성?
       title : '',
       content : '',
       writer : '',
-      timestamp: '', //글이 작성된 날짜 저장하는 데이터
+      timestamp: '', //글이 작성된 날짜 정의
       boardPost: [], //작성된 게시판 글들을 저장하는 배열
-      showModal: false
+      showModal: false //모달창의 표시여부 관리
     }
   },
-  created: function() {
-    //create LifeCycle Hook으로 localStorage에서 boardPost에 저장된 데이터를 불러오고, 배열에  할당함
-    if(localStorage.getItem('boardPost')){
+  created: function() { //글 등록시 데이터 유지
+    //create LifeCycle Hook에서 페이지 로드될때, localStorage에서 저장된 boardPost 데이터를 불러오고, 배열에 할당함
+    if(localStorage.getItem('boardPost')){ //getItem - 로컬스토리지에서 가져올때 사용
       this.boardPost = JSON.parse(localStorage.getItem('boardPost'))
     }
   },
   methods: {
     submitPost: function() {
       // 게시판 글 등록
-      console.log("등록 클릭");
 
       //입력하는 내용중에 하나라도 없으면 모달창 열림
       if (!this.title || !this.content || !this.writer) {
@@ -78,23 +77,16 @@ export default {
       console.log('newPost', newPost);
 
       
-        //localStorage에 게시글 저장하기
-      this.boardPost.push(newPost);
-      localStorage.setItem('boardPost', JSON.stringify(this.boardPost));
+      //localStorage에 게시글 저장하기
+      this.boardPost.push(newPost);//배열에 추가 후
+      localStorage.setItem('boardPost', JSON.stringify(this.boardPost)); //로컬스토리지에 업데이트
       console.log('boardPost', this.boardPost );
 
-      //입력된거 초기화작업
-      // this.title = '';
-      // this.content = '';
-      // this.writer = '';
-
+      //글 등록 후 목록으로 페이지 이동
       this.$router.push('/');
-     
-
   
     },
     goList: function() {
-      console.log('목록버튼 클릭');
       this.$router.push('/');
     }
   },
